@@ -33,6 +33,9 @@ app.use(expressLayouts);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 
+//mongoose db connection with .env 
+mongoose.connection.openUri(process.env.DB_URI);
+
 //port listen
 app.listen(port, () => {
 	console.log(`port is listening on ${port}`);
