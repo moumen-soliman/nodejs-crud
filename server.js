@@ -6,11 +6,11 @@ const port = process.env.PORT || 4300,
 	    app = express(),
 	    expressLayouts = require('express-ejs-layouts'),
       expressValidator = require('express-validator');
-      session        = require('express-session'),
-	    mongoose       = require('mongoose'),
-      bodyParser     = require('body-parser'),
-      cookieParser   = require('cookie-parser'),
-      flash          = require('connect-flash');
+      session = require('express-session'),
+	    mongoose = require('mongoose'),
+      bodyParser = require('body-parser'),
+      cookieParser = require('cookie-parser'),
+      flash = require('connect-flash');
 
 //add cookie parser
 app.use(cookieParser());
@@ -35,6 +35,9 @@ app.use(expressValidator());
 
 //mongoose db connection with .env 
 mongoose.connection.openUri(process.env.DB_URI);
+
+//routes
+app.use(require('./app/routes'));
 
 //port listen
 app.listen(port, () => {
