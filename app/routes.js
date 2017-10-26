@@ -6,3 +6,4 @@ module.exports = router;
 
 router.get('/', homeController.displayHome); // to display and get homepage
 
+router.get('/events', eventsController.showEvents);
