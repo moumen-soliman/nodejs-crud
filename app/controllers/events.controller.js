@@ -8,6 +8,7 @@ module.exports = {
 	  showEdit: showEdit,
 	  processEdit: processEdit,
 	  deleteEvent: deleteEvent,
+  	  seedEvents: seedEvents
 }
 
 function showEvents (req, res){
@@ -106,4 +107,21 @@ function deleteEvent(req, res){
 	    req.flash('success', 'Event deleted!');
 	    res.redirect('/events');
 	});
+}
+
+function seedEvents(req, res) {
+  // create some events
+  const events = [
+    { name: 'Destroy', description: 'crash building has destroyed.' },
+    { name: 'Running', description: 'there is runners in cairo' }
+  ];
+
+  Event.remove({}, () => {
+    for (event of events) {
+      var newEvent = new Event(event);
+      newEvent.save();
+    }
+  });
+
+  res.send('data seeded!');
 }
