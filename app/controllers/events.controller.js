@@ -7,6 +7,7 @@ module.exports = {
 	  processCreate: processCreate,
 	  showEdit: showEdit,
 	  processEdit: processEdit,
+	  deleteEvent: deleteEvent,
 }
 
 function showEvents (req, res){
