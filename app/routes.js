@@ -9,8 +9,6 @@ router.get('/', homeController.displayHome); // to display and get homepage
 
 router.get('/events', eventsController.showEvents);
 
-router.get('/events/:slug', eventsController.showSingle);
-
 router.get('/events/create',  eventsController.showCreate);
 router.post('/events/create', eventsController.processCreate);
 
@@ -23,3 +21,6 @@ router.post('/events/:slug',     eventsController.processEdit);
 router.get('/events/:slug/delete', eventsController.deleteEvent);
 
 router.get('/events/seed',  eventsController.seedEvents);
+
+router.get('/events/:slug', eventsController.showSingle);
+

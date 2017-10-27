@@ -2,13 +2,13 @@ const Event = require('../models/event');
 
 module.exports = {
 	showEvents: showEvents,
-	  showSingle: showSingle,
-	  showCreate: showCreate,
-	  processCreate: processCreate,
-	  showEdit: showEdit,
-	  processEdit: processEdit,
-	  deleteEvent: deleteEvent,
-  	  seedEvents: seedEvents
+	showSingle: showSingle,
+	showCreate: showCreate,
+	processCreate: processCreate,
+	showEdit: showEdit,
+	processEdit: processEdit,
+	deleteEvent: deleteEvent,
+  	seedEvents: seedEvents
 }
 
 function showEvents (req, res){
@@ -47,8 +47,8 @@ function showCreate(req, res) {
 
 
 function processCreate(req, res){
-	req.CheckBody('name', 'Name is required').notEmpty();
-	req.CheckBody('description', 'description is required').notEmpty();
+	req.checkBody('name', 'Name is required').notEmpty();
+	req.checkBody('description', 'description is required').notEmpty();
 
 	const errors = req.validationErrors();
 	if (errors) {
@@ -72,17 +72,17 @@ function processCreate(req, res){
 }
 
 function showEdit(req, res) {
-	Event.findOne({slug: req.params.slug}, (err, event) => {
-		res.render('/pages/edit', {
-			event: event,
-			errors: req.flash('errors')
-		});
-	});
+  Event.findOne({ slug: req.params.slug }, (err, event) => {
+    res.render('pages/edit', {
+      event: event,
+      errors: req.flash('errors')
+    });
+  });
 }
 
 function processEdit(req, res) {
-	req.CheckBody('name', 'name is required').notEmpty();
-	req.CheckBody('description', 'description is required');
+	req.checkBody('name', 'name is required').notEmpty();
+	req.checkBody('description', 'description is required').notEmpty();
 
 	const errors = req.validationErrors();
 	if (errors) {
