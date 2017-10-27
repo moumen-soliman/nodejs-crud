@@ -11,3 +11,6 @@ router.get('/events', eventsController.showEvents);
 router.get('/events/create',  eventsController.showCreate);
 router.post('/events/create', eventsController.processCreate);
 
+router.get('/events/edit',  eventsController.showEdit);
+router.post('/events/edit', eventsController.processEdit);
+

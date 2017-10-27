@@ -2,6 +2,11 @@ const Event = require('../models/event');
 
 module.exports = {
 	showEvents: showEvents,
+	  showSingle: showSingle,
+	  showCreate: showCreate,
+	  processCreate: processCreate,
+	  showEdit: showEdit,
+	  processEdit: processEdit,
 }
 
 function showEvents (req, res){
@@ -61,5 +66,36 @@ function processCreate(req, res){
 		req.flash('success', 'Successfuly created event !');
 
 		res.redirect(`/events/${event.slug}`);
+	});
+}
+
+function showEdit(req, res) {
+	Event.findOne({slug: req.params.slug}, (err, event) => {
+		res.render('/pages/edit', {
+			event: event,
+			errors: req.flash('errors')
+		});
+	});
+}
+
+function processEdit(req, res) {
+	req.CheckBody('name', 'name is required').notEmpty();
+	req.CheckBody('description', 'description is required');
+
+	const errors = req.validationErrors();
+	if (errors) {
+	    req.flash('errors', errors.map(err => err.msg));
+	    return res.redirect(`/events/${req.params.slug}/edit`);
+	}
+
+	Event.findOne({slug: req.params.slug}, (err, event) => {
+		event.name: req.body.name,
+		event.description: req.body.description;
+
+		if (err)
+			throw err;
+
+		req.flash('success', 'Successfuly updated');
+		res.redirect('/events')
 	});
 }
