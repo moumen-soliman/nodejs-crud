@@ -99,3 +99,10 @@ function processEdit(req, res) {
 		res.redirect('/events')
 	});
 }
+
+function deleteEvent(req, res){
+	Event.remove({ slug: req.params.slug }, (err) =>{
+	    req.flash('success', 'Event deleted!');
+	    res.redirect('/events');
+	});
+}
