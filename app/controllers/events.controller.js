@@ -91,14 +91,16 @@ function processEdit(req, res) {
 	}
 
 	Event.findOne({slug: req.params.slug}, (err, event) => {
-		event.name: req.body.name,
-		event.description: req.body.description;
+    	event.name = req.body.name;
+		event.description = req.body.description;
 
-		if (err)
-			throw err;
+	    event.save((err) => {
+	      if (err)
+	        throw err;
 
-		req.flash('success', 'Successfuly updated');
-		res.redirect('/events')
+	      req.flash('success', 'Successfully updated event.');
+	      res.redirect('/events');
+	    });
 	});
 }
 
