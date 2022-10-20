@@ -37,6 +37,6 @@
     "express-ejs-layouts": "^2.3.1",
     "express-session": "^1.15.6",
     "express-validator": "^4.2.1",
-    "mongoose": "^4.12.4"
+    "mongoose": "^4.13.21"
   }
 }
